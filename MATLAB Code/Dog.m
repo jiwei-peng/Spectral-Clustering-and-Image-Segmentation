@@ -165,3 +165,48 @@ title('B', 'FontSize',25);
 subplot(1, 3, 3);
 imshow(uint8(B));
 title('C', 'FontSize',25);
+
+
+%% Plot the Result of Segmentation using Different Splitting Point Choices
+
+maskA_1 = reshape(y_1 > 0 | y_1 < new_split, m, n);  
+maskB_1 = reshape(y_1 <= 0 & y_1 >= new_split , m, n);
+
+maskA_2 = reshape(y_1 > -2e-4 | y_1 < new_split, m, n);  
+maskB_2 = reshape(y_1 <= -2e-4 & y_1 >= new_split , m, n);
+
+maskA_3 = reshape(y_1 > optimal_split_pt(1) | y_1 < -4e-4, m, n);  
+maskB_3 = reshape(y_1 <= optimal_split_pt(1) & y_1 >= -4e-4 , m, n);
+
+maskA_4 = reshape(y_1 > optimal_split_pt(1) | y_1 < -3e-4, m, n);  
+maskB_4 = reshape(y_1 <= optimal_split_pt(1) & y_1 >= -3e-4 , m, n);
+
+B_1 = img_3 .* maskB_1;
+B_2 = img_3 .* maskB_2;
+B_3 = img_3 .* maskB_3;
+B_4 = img_3 .* maskB_4;
+
+figure;
+subplot(2, 3, 1);
+imshow(uint8(img_3));
+title('A', 'FontSize',25);
+
+subplot(2, 3, 2);
+imshow(uint8(B));
+title('B', 'FontSize',25);
+
+subplot(2, 3, 3);
+imshow(uint8(B_1));
+title('C', 'FontSize',25);
+
+subplot(2, 3, 4);
+imshow(uint8(B_2));
+title('D', 'FontSize',25);
+
+subplot(2, 3, 5);
+imshow(uint8(B_3));
+title('E', 'FontSize',25);
+
+subplot(2, 3, 6);
+imshow(uint8(B_4));
+title('F', 'FontSize',25);
